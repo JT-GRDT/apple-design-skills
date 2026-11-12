@@ -1,0 +1,37 @@
+/* Apple web design tokens (light + dark). Paste at the top of the stylesheet. Every component reads these variables,
+   so dark mode is automatic. Values match Apple.com "daytime" and iOS system colours. */
+:root{
+  --primary:#0071e3;--on-primary:#fff;            /* the one accent: actions, links, selected states, progress */
+  --ink:#1d1d1f;--ink80:#333336;--muted:#6e6e73;  /* text: primary, strong secondary (labels on glass), secondary */
+  --hair:rgba(0,0,0,.09);--soft:#ececf0;          /* hairline separators; pressed-row background */
+  --bg:#f5f5f7;--card:#fff;--fill:#e8e8ed;        /* page, tiles, grey fills (secondary buttons, tracks, chips) */
+  --ok:#248a3d;--warn:#c93400;--bad:#d70015;--badge:#ff3b30;   /* status only, never decoration */
+  --tile:#1d1d1f;--on-tile:#fff;--tile-link:#2997ff;           /* dark tiles (toasts, keynote) */
+  --scrim:rgba(0,0,0,.38);--bar:rgba(245,245,247,.72);         /* sheet backdrop; frosted bar */
+  --r-sm:8px;--r-md:14px;--r-lg:22px;--r-xl:28px;
+  --shadow:0 4px 18px rgba(0,0,0,.06);
+  --spring:cubic-bezier(.3,1.4,.5,1);   /* presses, pops: a little overshoot */
+  --ease:cubic-bezier(.2,.8,.2,1);      /* fades, progress bars */
+  --ios:cubic-bezier(.32,.72,0,1);      /* sheets, tab indicator, big moves: iOS's curve, no overshoot */
+}
+@media (prefers-color-scheme:dark){:root{
+  --primary:#2997ff;--ink:#f5f5f7;--ink80:#d1d1d6;--muted:#86868b;
+  --hair:rgba(255,255,255,.1);--soft:#2c2c2e;--bg:#000;--card:#1d1d1f;--fill:#2c2c2e;
+  --ok:#30d158;--warn:#ff9f0a;--bad:#ff453a;--badge:#ff453a;
+  --tile:#2c2c2e;--bar:rgba(22,22,23,.72);--shadow:none;   /* shadows read as dirt on black */
+}}
+/* A manual theme switch (Light / Dark / Automatic) sets data-theme on <html>; repeat the dark block for it:
+   :root[data-theme="dark"]{ ...same values as above... }  and guard the media query with :root:not([data-theme="light"]). */
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:400 17px/1.4 -apple-system,BlinkMacSystemFont,Inter,system-ui,sans-serif;   /* SF on Apple devices; never name "SF Pro" */
+  -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+[hidden]{display:none!important}
+main{max-width:720px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 20px) 16px calc(110px + env(safe-area-inset-bottom))}
+h1{font-size:44px;font-weight:700;letter-spacing:-.035em;margin:14px 2px 0;line-height:1.05}
+.mt{margin-top:16px}.mt2{margin-top:28px}.center{text-align:center}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
